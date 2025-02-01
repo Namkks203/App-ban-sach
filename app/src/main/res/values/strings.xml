@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">AppBanSach</string>
+    <string name="title_activity_list_khach_hang">ListKhachHang</string>
+</resources>

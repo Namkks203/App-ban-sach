@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="5dp"
+    android:background="#ffffff">
+    <ImageView
+        android:id="@+id/item_suaxoaImage"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:src="@drawable/book"/>
+    <TextView
+        android:id="@+id/suaxoaTenS"
+        android:layout_width="180dp"
+        android:layout_height="48dp"
+        android:text="Ten sach"
+        android:textSize="18sp"/>
+    <Button
+        android:id="@+id/suaxoaSuaBtn"
+        android:layout_marginTop="6dp"
+        android:layout_width="75dp"
+        android:layout_height="40dp"
+        android:text="Sửa"
+        android:backgroundTint="#ff9933"/>
+    <Button
+        android:id="@+id/suaxoaXoaBtn"
+        android:layout_marginTop="6dp"
+        android:layout_width="75dp"
+        android:layout_height="40dp"
+        android:text="Xóa"
+        android:backgroundTint="#ff0000"/>
+</LinearLayout>
