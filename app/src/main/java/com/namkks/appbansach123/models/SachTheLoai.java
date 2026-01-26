@@ -29,23 +29,23 @@ public class SachTheLoai {
         }
     }
 
-    public static ArrayList<SachTacGia> getSachTheLoaiBySachId(int sachId){
+    public static ArrayList<SachTheLoai> getSachTheLoaiBySachId(int sachId){
         DAO dao = new DAO();
         try{
-            ArrayList<SachTacGia> listSachTacGias = new ArrayList<>();
+            ArrayList<SachTheLoai> theLoaiArrayList = new ArrayList<>();
             PreparedStatement stm = dao.con.prepareStatement("SELECT * FROM sach_the_loais WHERE sach_id = ?");
             stm.setInt(1, sachId);
 
             ResultSet rs = stm.executeQuery();
             while (rs.next()){
-                SachTacGia sachTacGia = new SachTacGia();
-                sachTacGia.setSachId(rs.getInt("sach_id"));
-                sachTacGia.setTacGiaId(rs.getInt("the_loai_id"));
+                SachTheLoai sachTheLoai = new SachTheLoai();
+                sachTheLoai.setSachId(rs.getInt("sach_id"));
+                sachTheLoai.setTheLoaiId(rs.getInt("the_loai_id"));
 
-                listSachTacGias.add(sachTacGia);
+                theLoaiArrayList.add(sachTheLoai);
             }
             dao.close();
-            return listSachTacGias;
+            return theLoaiArrayList;
         }catch (Exception e){
             dao.close();
             return null;
@@ -71,6 +71,22 @@ public class SachTheLoai {
         }catch (Exception e){
             dao.close();
             return null;
+        }
+    }
+
+    public static boolean xoaSachTheLoai(int idSach){
+        DAO dao = new DAO();
+        try{
+            PreparedStatement stm = dao.con.prepareStatement("DELETE FROM sach_the_loais WHERE sach_id = ?");
+            stm.setInt(1, idSach);
+
+            boolean result = stm.executeUpdate() > 0;
+
+            dao.close();
+            return result;
+        } catch (Exception e) {
+            dao.close();
+            return false;
         }
     }
 

@@ -220,7 +220,7 @@
                         android:id="@+id/themSachBtn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Thêm quần áo"
+                        android:text="Thêm sách"
                         android:textSize="22sp"
                         android:layout_marginLeft="40dp"
                         android:layout_marginRight="40dp"

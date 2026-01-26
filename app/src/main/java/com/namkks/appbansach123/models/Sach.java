@@ -147,20 +147,24 @@ public class Sach {
         }
     }
     public boolean suaSach(){
+        DAO a = new DAO();
         try {
-            DAO a = new DAO();
-            PreparedStatement stm = a.con.prepareStatement("UPDATE `quanao` SET `ten_quan_ao`=?,`size`=?,`loai`=?, `mo_ta`=?," +
-                    "`gia_tien`=?,`anh`=? WHERE `id`=?");
+            PreparedStatement stm = a.con.prepareStatement("Update sachs set ten_sach = ?, nha_xuat_ban = ?," +
+                    "nam_xuat_ban = ?, gia_ban = ?, gia_thue = ?, anh = ? , mo_ta = ? where id = ?");
             stm.setString(1, this.tenSach);
             stm.setString(2, this.nhaXuatBan);
             stm.setInt(3, this.namXuatBan);
-            stm.setString(4, this.moTa);
-            stm.setFloat(5, this.giaBan);
+            stm.setInt(4, this.giaBan);
+            stm.setFloat(5, this.giaThue);
             stm.setString(6, this.anh);
-            stm.setInt(7, this.id);
+            stm.setString(7, this.moTa);
+            stm.setInt(8, this.id);
 
-            return stm.executeUpdate() > 0;
+            boolean result =  stm.executeUpdate() > 0;
+            a.close();
+            return  result;
         }catch (SQLException e){
+            a.close();
             return false;
         }
     }

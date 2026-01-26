@@ -75,6 +75,22 @@ public class SachTacGia {
         }
     }
 
+    public static boolean xoaSachTacGia(int idSach){
+        DAO dao = new DAO();
+        try{
+            PreparedStatement stm = dao.con.prepareStatement("DELETE FROM sach_tac_gias WHERE sach_id = ?");
+            stm.setInt(1, idSach);
+
+            boolean result = stm.executeUpdate() > 0;
+
+            dao.close();
+            return result;
+        } catch (Exception e) {
+            dao.close();
+            return false;
+        }
+    }
+
     public int getTacGiaId() {
         return tacGiaId;
     }
