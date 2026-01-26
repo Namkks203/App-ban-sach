@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.ThemSachActivity">
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="#eeeeee">
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbarTK"
+                app:title="Thêm sách"
+                android:background="#ff0000"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize">
+            </androidx.appcompat.widget.Toolbar>
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <androidx.cardview.widget.CardView
+                        android:elevation="8dp"
+                        app:cardCornerRadius="4dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="50dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:background="#ffffff">
+                        <EditText
+                            android:id="@+id/tenSachThemTxt"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:hint="Tên sách"
+                            android:textSize="22sp"/>
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:elevation="8dp"
+                        app:cardCornerRadius="4dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:background="#ffffff">
+                        <EditText
+                            android:id="@+id/nhaXuatBanThemTxt"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:hint="Nhà xuất bản"
+                            android:textSize="22sp"/>
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:elevation="8dp"
+                        app:cardCornerRadius="4dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:background="#ffffff">
+                        <EditText
+                            android:id="@+id/namXuatBanThemTxt"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:inputType="number"
+                            android:hint="Năm xuất bản"
+                            android:textSize="22sp"/>
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:elevation="8dp"
+                        app:cardCornerRadius="4dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp">
+
+                        <MultiAutoCompleteTextView
+                            android:id="@+id/autoTacGia"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:textSize="22sp"
+                            android:hint="Tác giả"
+                            android:completionThreshold="1"/>
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:elevation="8dp"
+                        app:cardCornerRadius="4dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp">
+
+                        <MultiAutoCompleteTextView
+                            android:id="@+id/autoTheLoai"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:textSize="22sp"
+                            android:hint="Thể loại"
+                            android:completionThreshold="1"/>
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+                        android:elevation="8dp"
+                        app:cardCornerRadius="4dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:background="#ffffff">
+                        <EditText
+                            android:id="@+id/giaThueThemTxt"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:inputType="number"
+                            android:hint="Giá Thuê"
+                            android:textSize="22sp"/>
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:elevation="8dp"
+                        app:cardCornerRadius="4dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:background="#ffffff">
+                        <EditText
+                            android:id="@+id/giaBanTxt"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:hint="Giá bán"
+                            android:inputType="number"
+                            android:textSize="22sp"/>
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:elevation="8dp"
+                        app:cardCornerRadius="4dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:background="#ffffff">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+                            <FrameLayout
+                                android:layout_width="200dp"
+                                android:layout_height="200dp">
+
+                                <ImageView
+                                    android:id="@+id/anhSachThem"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:src="@drawable/ic_media_24"
+                                    android:scaleType="centerCrop"/>
+
+                                <ProgressBar
+                                    android:id="@+id/imageProgress"
+                                    style="?android:attr/progressBarStyleLarge"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:visibility="gone" />
+
+                            </FrameLayout>
+
+                            <Button
+                                android:id="@+id/themAnhSachBtn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="20dp"
+                                android:text="Thêm ảnh"
+                                android:backgroundTint="@android:color/holo_orange_dark"
+                                />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:elevation="8dp"
+                        app:cardCornerRadius="4dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:background="#ffffff">
+                        <EditText
+                            android:id="@+id/motaTxt"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:hint="Mô tả"
+                            android:textSize="22sp"/>
+                    </androidx.cardview.widget.CardView>
+                    <Button
+                        android:id="@+id/themSachBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Thêm quần áo"
+                        android:textSize="22sp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="40dp"
+                        android:layout_marginTop="30dp"
+                        android:backgroundTint="#ff9933"/>
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+        </LinearLayout>
+    </androidx.drawerlayout.widget.DrawerLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

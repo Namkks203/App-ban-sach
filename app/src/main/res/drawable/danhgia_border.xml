@@ -1,0 +1,12 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Màu nền của TextView (nếu muốn) -->
+    <solid android:color="#FFFFFF" /> <!-- Màu nền trắng -->
+
+    <!-- Cài đặt viền -->
+    <stroke
+        android:width="2dp"
+    android:color="#FF0000" />
+
+    <!-- Bo góc -->
+    <corners android:radius="8dp" /> <!-- Bo tròn các góc với bán kính 8dp -->
+</shape>

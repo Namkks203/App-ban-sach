@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="140dp"
+            android:layout_height="match_parent"
+            android:text="Đánh giá sản phẩm"
+            android:gravity="center_vertical"
+            android:textSize="16sp"/>
+        <RatingBar
+            android:id="@+id/ratingBarDG"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:numStars="5"
+            android:progressTint="#FFEB3B"
+            android:isIndicator="false"
+            android:stepSize="1"
+            android:scaleX="0.5"
+            android:scaleY="0.5"
+            android:layout_gravity="start"/>
+    </LinearLayout>
+    <EditText
+        android:id="@+id/danhgiaTxt"
+        android:layout_width="match_parent"
+        android:textSize="16sp"
+        android:hint="Viết nhận xét cho sản phẩm"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/guiDGBtn"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:text="GỞI ĐÁNH GIÁ"
+        android:textSize="16sp"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:background="#ff9900"/>
+</LinearLayout>

@@ -1,0 +1,58 @@
+plugins {
+    alias(libs.plugins.android.application)
+}
+def localProperties = new Properties()
+localProperties.load(new FileInputStream(rootProject.file("local.properties")))
+
+android {
+    namespace 'com.namkks.appbansach123'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId "com.namkks.appbansach123"
+        minSdk 26
+        targetSdk 35
+        versionCode 3
+        versionName "1.1"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "IMGBB_API_KEY", "\"${localProperties['IMGBB_API_KEY']}\""
+        buildConfigField "String", "BASE_URL", "\"${localProperties['BASE_URL']}\""
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildFeatures {
+        buildConfig true
+    }
+}
+
+dependencies {
+
+    implementation libs.appcompat
+    implementation libs.material
+    implementation libs.activity
+    implementation libs.constraintlayout
+    testImplementation libs.junit
+    androidTestImplementation libs.ext.junit
+    androidTestImplementation libs.espresso.core
+    //glider
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+
+    implementation 'mysql:mysql-connector-java:5.1.49'
+
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+
+
+}

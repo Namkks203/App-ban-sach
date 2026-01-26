@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.SuaKHActivity">
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="#eeeeee">
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbarTK"
+                app:title="Sửa khách hàng"
+                android:background="#ff0000"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"/>
+            <androidx.cardview.widget.CardView
+                android:elevation="8dp"
+                app:cardCornerRadius="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="#ffffff">
+                <EditText
+                    android:id="@+id/tenKHSuaTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:hint="Họ tên"
+                    android:textSize="22sp"/>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:elevation="8dp"
+                app:cardCornerRadius="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="#ffffff">
+                <EditText
+                    android:id="@+id/SDTSuaTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:hint="Số điện thoại"
+                    android:textSize="22sp"/>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:elevation="8dp"
+                app:cardCornerRadius="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="#ffffff">
+                <EditText
+                    android:id="@+id/MKSuaTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:hint="Mật khẩu"
+                    android:textSize="22sp"/>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:elevation="8dp"
+                app:cardCornerRadius="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="#ffffff">
+                <EditText
+                    android:id="@+id/DiaChiSuaTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:hint="Địa chỉ"
+                    android:textSize="22sp"/>
+            </androidx.cardview.widget.CardView>
+            <Button
+                android:id="@+id/suaKHBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sửa khách hàng"
+                android:textSize="22sp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="30dp"
+                android:backgroundTint="#ff9933"/>
+        </LinearLayout>
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
