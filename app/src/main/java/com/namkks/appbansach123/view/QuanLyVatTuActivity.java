@@ -14,15 +14,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.namkks.appbansach123.R;
-import com.namkks.appbansach123.adapter.ListGioHangAdapter;
+import com.namkks.appbansach123.adapter.ListQuanLyVatTuAdater;
 import com.namkks.appbansach123.adapter.ListSachSuaXoaAdapter;
-import com.namkks.appbansach123.models.GioHang;
+import com.namkks.appbansach123.models.NhanVien;
 import com.namkks.appbansach123.models.Sach;
+import com.namkks.appbansach123.models.TonKho;
 
-public class ListSachSuaXoaActivity extends AppCompatActivity {
+public class QuanLyVatTuActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     RecyclerView recyclerViewSXSach;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,13 +40,13 @@ public class ListSachSuaXoaActivity extends AppCompatActivity {
         LoadData();
     }
 
-    private void AnhXa(){
+    private void AnhXa() {
         toolbar = findViewById(R.id.toolbarTK);
         recyclerViewSXSach = findViewById(R.id.recycleviewSXSach);
     }
 
     @SuppressLint("RestrictedApi")
-    private void ActionBar(){
+    private void ActionBar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_24);
@@ -54,16 +56,14 @@ public class ListSachSuaXoaActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        toolbar.setTitle("Quản lý vật tư");
     }
-    private void LoadData(){
+
+    private void LoadData() {
         recyclerViewSXSach.setLayoutManager(new LinearLayoutManager(this));
-        ListSachSuaXoaAdapter listSachSuaXoaAdapter = new ListSachSuaXoaAdapter(Sach.getAllSach());
-        recyclerViewSXSach.setAdapter(listSachSuaXoaAdapter);
-        listSachSuaXoaAdapter.setOnDataChangedListener(new ListSachSuaXoaAdapter.OnDataChangedListener() {
-            @Override
-            public void onDataChanged() {
-                LoadData();
-            }
-        });
+        NhanVien nhanVien = NhanVien.getNhanVien(LoginActivity.tk.getId());
+        ListQuanLyVatTuAdater listQuanLyVatTuAdater = new ListQuanLyVatTuAdater(
+                TonKho.getListTonKhoByChiNhanhId(nhanVien.getChiNhanhId()));
+        recyclerViewSXSach.setAdapter(listQuanLyVatTuAdater);
     }
 }

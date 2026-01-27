@@ -314,6 +314,13 @@ public class SuaSachActivity extends AppCompatActivity {
     // ================== Add Book ==================
     private void handleUpdateBook() {
 
+        if (!isValidInput()) {
+            Toast.makeText(this,
+                    "Vui lòng nhập đầy đủ & đúng định dạng!",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         Sach sach = new Sach();
         sach.setId(s.getId());
         sach.setTenSach(tenSachThemTxt.getText().toString().trim());

@@ -53,6 +53,9 @@
             android:name=".view.ThemSachActivity"
             android:exported="false" />
         <activity
+            android:name=".view.QuanLyVatTuActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.GioHangActivity"
             android:exported="false" />
         <activity

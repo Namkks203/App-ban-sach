@@ -136,12 +136,15 @@ public class Sach {
     }
 
     public static boolean xoaSach(int id_sach){
+        DAO a = new DAO();
         try {
-            DAO a = new DAO();
-            PreparedStatement stm = a.con.prepareStatement("DELETE FROM `quanao` WHERE id = ?");
+            PreparedStatement stm = a.con.prepareStatement("DELETE FROM `sachs` WHERE id = ?");
             stm.setInt(1, id_sach);
 
-            return stm.executeUpdate() > 0;
+            boolean result = stm.executeUpdate() > 0;
+            a.close();
+
+            return result;
         }catch (SQLException e){
             return false;
         }
@@ -280,7 +283,7 @@ public class Sach {
         this.moTa = moTa;
     }
 
-    public float getGiaBan() {
+    public int getGiaBan() {
         return giaBan;
     }
 

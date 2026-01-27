@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="5dp"
+    android:background="#ffffff">
+    <FrameLayout
+        android:layout_width="55dp"
+        android:layout_height="55dp">
+
+        <ImageView
+            android:id="@+id/item_anhQuanLyVatTu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_media_24"
+            android:scaleType="centerCrop"/>
+
+        <ProgressBar
+            android:id="@+id/imageProgress"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
+    </FrameLayout>
+    <TextView
+        android:id="@+id/item_tenSachQuanLyVatTu"
+        android:layout_width="250dp"
+        android:layout_height="48dp"
+        android:text="Ten sach"
+        android:textSize="18sp"/>
+    <TextView
+        android:id="@+id/item_soLuongTonKho"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:text="Tồn kho: "
+        android:textSize="18sp"/>
+</LinearLayout>

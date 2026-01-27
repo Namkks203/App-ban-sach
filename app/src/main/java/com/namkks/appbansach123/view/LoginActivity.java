@@ -20,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.core.widget.NestedScrollView;
 
 import com.namkks.appbansach123.R;
 import com.namkks.appbansach123.models.KhachHang;
@@ -32,12 +33,13 @@ public class LoginActivity extends AppCompatActivity {
     suaKHLayout, xoaKHLayout, ThongKeLayout;
     TextView loginTxt, registerTxt, tenKhtxt, tenNVtxt, themSachLayout,
     suaSachLayout, xoaSachLayout, qldonhangLayout, tkDXBtn, nvDXBtn,
-    profile, soLDonHang, soLHoaDon;
+    profile, soLDonHang, soLHoaDon, qlVatTu;
     ViewFlipper viewFlipperLogin;
     boolean isLoginForm;
     EditText sdtDNtxt, mkDNtxt, hoTenDKtxt, sdtDKtxt, passDKtxt, diaChiDKtxt;
-    LinearLayout loreform, tk_profile, tk_NVprofile;
+    LinearLayout loreform, tk_profile ;
     Button dnBtn, dkBtn;
+    NestedScrollView tk_NVprofile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +105,7 @@ public class LoginActivity extends AppCompatActivity {
         suaKHLayout = findViewById(R.id.suaKHLayout);
         xoaKHLayout = findViewById(R.id.xoaKHLayout);
         ThongKeLayout = findViewById(R.id.ThongKeLayout);
+        qlVatTu = findViewById(R.id.qlVatTu);
     }
     public void ChuyenThongKeLayout(){
         ThongKeLayout.setOnClickListener(new View.OnClickListener() {
@@ -111,6 +114,10 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(LoginActivity.this, ThongKeActivity.class);
                 startActivity(intent);
             }
+        });
+        qlVatTu.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, QuanLyVatTuActivity.class);
+            startActivity(intent);
         });
     }
     public void ChuyenProfile(){
@@ -285,7 +292,7 @@ public class LoginActivity extends AppCompatActivity {
                                         "Đăng nhập thành công!",
                                         Toast.LENGTH_SHORT)
                                 .show();
-                        if(tk.getLoaiTaiKhoan().equals("nhan_vien")){
+                        if(tk.getLoaiTaiKhoan().equals("nhan_vien") || tk.getLoaiTaiKhoan().equals("quan_ly")){
                             ShowNVProfile();
                         }
                     }

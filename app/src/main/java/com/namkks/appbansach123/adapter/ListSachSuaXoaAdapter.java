@@ -27,12 +27,14 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.namkks.appbansach123.R;
 import com.namkks.appbansach123.models.Sach;
+import com.namkks.appbansach123.models.SachTacGia;
+import com.namkks.appbansach123.models.SachTheLoai;
 import com.namkks.appbansach123.view.SuaSachActivity;
 
 import java.util.ArrayList;
 
 
-public class ListSachSuaXoaAdapter extends RecyclerView.Adapter<ListSachSuaXoaAdapter.ViewHolder>{
+public class ListSachSuaXoaAdapter extends RecyclerView.Adapter<ListSachSuaXoaAdapter.ViewHolder> {
     private ArrayList<Sach> listSach;
 
     public ListSachSuaXoaAdapter(ArrayList<Sach> listSach) {
@@ -61,16 +63,18 @@ public class ListSachSuaXoaAdapter extends RecyclerView.Adapter<ListSachSuaXoaAd
         void onDataChanged();
     }
 
-    private ListGioHangAdapter.OnDataChangedListener listener;
+    private OnDataChangedListener listener;
 
-    public void setOnDataChangedListener(ListGioHangAdapter.OnDataChangedListener listener) {
+    public void setOnDataChangedListener(OnDataChangedListener listener) {
         this.listener = listener;
     }
-    public class ViewHolder extends RecyclerView.ViewHolder{
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView item_suaxoaImage;
         TextView suaxoaTenS;
         Button suaxoaSuaBtn, suaxoaXoaBtn;
         ProgressBar imageProgress;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             item_suaxoaImage = itemView.findViewById(R.id.item_suaxoaImage);
@@ -79,6 +83,7 @@ public class ListSachSuaXoaAdapter extends RecyclerView.Adapter<ListSachSuaXoaAd
             suaxoaXoaBtn = itemView.findViewById(R.id.suaxoaXoaBtn);
             imageProgress = itemView.findViewById(R.id.imageProgress);
         }
+
         void bind(Sach sach) {
             suaxoaTenS.setText(sach.getTenSach());
 
@@ -103,12 +108,15 @@ public class ListSachSuaXoaAdapter extends RecyclerView.Adapter<ListSachSuaXoaAd
                             .setPositiveButton("Có", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    if(Sach.xoaSach(sach.getId())){
+
+                                    if (SachTacGia.xoaSachTacGia(sach.getId()) &
+                                            SachTheLoai.xoaSachTheLoai(sach.getId()) &
+                                            Sach.xoaSach(sach.getId())) {
                                         Toast.makeText(context, "Xóa thành công!", Toast.LENGTH_SHORT).show();
                                         if (listener != null) {
                                             listener.onDataChanged();
                                         }
-                                    }else {
+                                    } else {
                                         Toast.makeText(context, "Xóa thất bại!", Toast.LENGTH_SHORT).show();
                                     }
                                 }
@@ -122,6 +130,7 @@ public class ListSachSuaXoaAdapter extends RecyclerView.Adapter<ListSachSuaXoaAd
                 }
             });
         }
+
         private void loadImage(String url) {
             imageProgress.setVisibility(View.VISIBLE);
 
@@ -134,6 +143,7 @@ public class ListSachSuaXoaAdapter extends RecyclerView.Adapter<ListSachSuaXoaAd
                     .listener(glideListener())
                     .into(item_suaxoaImage);
         }
+
         private RequestListener<Drawable> glideListener() {
             return new RequestListener<Drawable>() {
                 @Override
