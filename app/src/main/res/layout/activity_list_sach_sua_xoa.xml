@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".view.ListSachSuaXoaActivity">
     <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawerlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
@@ -15,11 +16,32 @@
             android:orientation="vertical">
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbarTK"
-                app:title="Sửa xóa sách"
                 android:background="#ff0000"
                 app:titleTextColor="#ffffff"
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/suaXoaSachTitle"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:text="Sửa xóa sách"
+                        android:textSize="25sp"
+                        android:textColor="#ffffff"
+                        android:gravity="center"/>
+                    <ImageView
+                        android:id="@+id/menuIcon"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:scaleX="0.6"
+                        android:scaleY="0.6"
+                        android:layout_gravity="center"
+                        android:background="@drawable/baseline_menu_24"/>
+                </LinearLayout>
             </androidx.appcompat.widget.Toolbar>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycleviewSXSach"
@@ -32,5 +54,67 @@
 
             </androidx.recyclerview.widget.RecyclerView>
         </LinearLayout>
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navigationview"
+            android:layout_gravity="end"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="Nhập xuất vật tư"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#ff0000"
+                    android:gravity="center" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:id="@+id/addMaterial"
+                        android:layout_margin="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/add_material"/>
+                        <TextView
+                            android:layout_marginLeft="20dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Nhập hàng vào kho."
+                            android:textSize="20sp"
+                            android:gravity="center_vertical"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/exportMaterial"
+                        android:layout_margin="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/export_material"/>
+                        <TextView
+                            android:layout_marginLeft="20dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Xuất hàng khỏi kho."
+                            android:textSize="20sp"
+                            android:gravity="center_vertical"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+        </com.google.android.material.navigation.NavigationView>
     </androidx.drawerlayout.widget.DrawerLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

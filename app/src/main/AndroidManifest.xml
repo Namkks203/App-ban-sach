@@ -17,6 +17,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="35">
         <activity
+            android:name=".view.ThanhToanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.NhapVatTuActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.ThongKeActivity"
             android:exported="false" />
         <activity

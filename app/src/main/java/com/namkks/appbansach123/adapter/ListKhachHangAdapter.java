@@ -40,7 +40,7 @@ public class ListKhachHangAdapter extends RecyclerView.Adapter<ListKhachHangAdap
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         int i = position;
         holder.idKH.setText("id: " + listKH.get(i).getId());
-        holder.HoTenKH.setText(listKH.get(i).getHoTen());
+        holder.HoTenKH.setText(listKH.get(i).getTen());
 
         holder.SuaKHBtn.setOnClickListener(new View.OnClickListener() {
             @Override

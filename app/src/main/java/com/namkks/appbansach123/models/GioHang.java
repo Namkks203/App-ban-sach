@@ -7,26 +7,41 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class GioHang extends Sach {
+public class GioHang{
+    private int khachHangId;
+    private int sachId;
     private int soLuong;
 
     public GioHang() {
     }
 
-    public GioHang(int soLuong) {
+    public GioHang(int khachHangId, int sachId, int soLuong) {
+        this.khachHangId = khachHangId;
+        this.sachId = sachId;
         this.soLuong = soLuong;
     }
 
-    public static boolean ThemGioHang(int id_kh, int id_sach){
+    public static GioHang ThemGioHang(int id_kh, int id_sach){
+        DAO a = new DAO();
         try{
-            DAO a = new DAO();
-            PreparedStatement stm = a.con.prepareStatement("INSERT INTO `giohang`(`id_khachhang`, `id_sach`, `so_luong`) VALUES (?, ?, 1)");
+
+            PreparedStatement stm = a.con.prepareStatement("INSERT INTO `gio_hangs`(`khach_hang_id`, `sach_id`, `so_luong`) VALUES (?, ?, 1)");
             stm.setInt(1, id_kh);
             stm.setInt(2, id_sach);
 
-            return stm.executeUpdate() > 0;
+            int affected = stm.executeUpdate();
+            if(affected > 0){
+                GioHang gh = getGioHang(id_kh, id_sach);
+
+                a.close();
+                return gh;
+            }
+
+            a.close();
+            return null;
         }catch (SQLException e){
-            return false;
+            a.close();
+            return null;
         }
     }
 
@@ -44,53 +59,109 @@ public class GioHang extends Sach {
         }
     }
 
-    public static ArrayList<GioHang> getGioHang(int id_kh){
-        ArrayList<GioHang> list = new ArrayList<>();
+    public static ArrayList<GioHang> getGioHangByKhachHangId(int id_kh){
+        DAO a = new DAO();
         try{
-            DAO a = new DAO();
-            PreparedStatement stm = a.con.prepareStatement("SELECT s.id, s.ten_quan_ao, s.gia_tien, gh.so_luong, s.anh FROM giohang gh ,quanao s " +
-                    "WHERE gh.id_sach = s.id and gh.id_khachhang = ?");
+            ArrayList<GioHang> list = new ArrayList<>();
+            PreparedStatement stm = a.con.prepareStatement("SELECT * FROM gio_hangs where khach_hang_id = ?");
             stm.setInt(1, id_kh);
             ResultSet rs = stm.executeQuery();
             while (rs.next()){
                 GioHang gh = new GioHang();
-                gh.setId(rs.getInt(1));
-                gh.setTenSach(rs.getString(2));
-                gh.setGiaBan(rs.getInt(3));
-                gh.setSoLuong(rs.getInt(4));
-                gh.setAnh(rs.getString(5));
+                gh.setKhachHangId(rs.getInt("khach_hang_id"));
+                gh.setSachId(rs.getInt("sach_id"));
+                gh.setSoLuong(rs.getInt("so_luong"));
+
                 list.add(gh);
             }
+
+            a.close();
             return list;
         }catch (SQLException e){
-            return list;
+            a.close();
+            return null;
         }
     }
-    public boolean UpdateSoLuong(int id_kh, int soL){
+    public static GioHang getGioHang(int khachHangId, int sachId){
+        DAO a = new DAO();
         try{
-            DAO a = new DAO();
-            PreparedStatement stm = a.con.prepareStatement("UPDATE `giohang` SET `so_luong`= ? WHERE id_khachhang = ? and id_sach = ?");
+            PreparedStatement stm = a.con.prepareStatement("SELECT * FROM gio_hangs " +
+                    "where khach_hang_id = ? AND sach_id = ?");
+            stm.setInt(1, khachHangId);
+            stm.setInt(2, sachId);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()){
+                GioHang gh = new GioHang();
+                gh.setKhachHangId(rs.getInt("khach_hang_id"));
+                gh.setSachId(rs.getInt("sach_id"));
+                gh.setSoLuong(rs.getInt("so_luong"));
+
+                a.close();
+                return gh;
+            }
+            a.close();
+            return null;
+        }catch (SQLException e){
+            a.close();
+            return null;
+        }
+    }
+    public static GioHang UpdateSoLuong(int id_kh,int sach_id, int soL){
+        DAO a = new DAO();
+        try{
+            PreparedStatement stm = a.con.prepareStatement("UPDATE `gio_hangs` SET `so_luong`= ? " +
+                    "WHERE khach_hang_id = ? and sach_id = ?");
             stm.setInt(1, soL);
             stm.setInt(2, id_kh);
-            stm.setInt(3, this.getId());
+            stm.setInt(3, sach_id);
 
-            return stm.executeUpdate() > 0;
+            int affected =  stm.executeUpdate();
+            if(affected > 0){
+                GioHang gioHang = getGioHang(id_kh, sach_id);
+
+                a.close();
+                return gioHang;
+            }
+
+            a.close();
+            return null;
         }catch (SQLException e){
+            a.close();
+            return null;
+        }
+    }
+
+    public static boolean DeleteItemGH(int id_kh, int sachId){
+        DAO a = new DAO();
+        try{
+            PreparedStatement stm = a.con.prepareStatement("DELETE FROM `gio_hangs` WHERE khach_hang_id = ? and sach_id = ?");
+            stm.setInt(1, id_kh);
+            stm.setInt(2, sachId);
+
+            boolean result = stm.executeUpdate() > 0;
+
+            a.close();
+            return result;
+        }catch (SQLException e){
+            a.close();
             return false;
         }
     }
 
-    public boolean DeleteItemGH(int id_kh){
-        try{
-            DAO a = new DAO();
-            PreparedStatement stm = a.con.prepareStatement("DELETE FROM `giohang` WHERE id_khachhang = ? and id_sach = ?");
-            stm.setInt(1, id_kh);
-            stm.setInt(2, this.getId());
+    public int getKhachHangId() {
+        return khachHangId;
+    }
 
-            return stm.executeUpdate() > 0;
-        }catch (SQLException e){
-            return false;
-        }
+    public void setKhachHangId(int khachHangId) {
+        this.khachHangId = khachHangId;
+    }
+
+    public int getSachId() {
+        return sachId;
+    }
+
+    public void setSachId(int sachId) {
+        this.sachId = sachId;
     }
 
     public int getSoLuong() {

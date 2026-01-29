@@ -30,11 +30,26 @@
                 android:orientation="vertical"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp">
-                <ImageView
-                    android:id="@+id/ctspImage"
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="250dp"
-                    android:src="@drawable/ic_media_24"/>
+                    android:layout_height="250dp">
+
+                    <ImageView
+                        android:id="@+id/item_anhSach"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_media_24"
+                        android:scaleType="fitCenter"/>
+
+                    <ProgressBar
+                        android:id="@+id/imageProgress"
+                        style="?android:attr/progressBarStyleLarge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:visibility="gone" />
+
+                </FrameLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -42,20 +57,27 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="5dp">
                     <TextView
-                        android:id="@+id/giaTxt"
                         android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Giá bán"
+                        android:textSize="28sp"
+                        android:layout_marginRight="10dp"
+                        android:textColor="@android:color/holo_red_light"/>
+                    <TextView
+                        android:id="@+id/giaTxt"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:text="20.000 d"
                         android:textSize="28sp"
-                        android:layout_marginRight="10dp"
                         android:textColor="@android:color/holo_red_light"/>
                     <TextView
                         android:id="@+id/giagiamTxt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="21.000 d"
-                        android:textSize="20sp"
-                        android:layout_marginRight="10dp"
+                        android:textColor="#808080"
+                        android:textSize="16sp"
                         android:gravity="bottom"/>
                     <TextView
                         android:layout_width="wrap_content"
@@ -65,6 +87,28 @@
                         android:gravity="bottom"
                         android:textColor="@android:color/holo_red_light"
                         android:background="#ffccff"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Giá thuê"
+                        android:textSize="28sp"
+                        android:layout_marginRight="10dp"
+                        android:textColor="#0000ff"/>
+                    <TextView
+                        android:id="@+id/giaThueTxt"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="20.000 d"
+                        android:textSize="28sp"
+                        android:textColor="#0000ff"/>
                 </LinearLayout>
                 <TextView
                     android:layout_width="120dp"
@@ -126,7 +170,7 @@
                         <TextView
                             android:layout_width="130dp"
                             android:layout_height="match_parent"
-                            android:text="Size"
+                            android:text="Tác giả"
                             android:textSize="18sp"
                             android:textColor="#808080"/>
                         <TextView

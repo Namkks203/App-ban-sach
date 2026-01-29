@@ -33,7 +33,7 @@ public class ListBinhLuanAdapter extends RecyclerView.Adapter<ListBinhLuanAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         viewHolder.ratingBarDG.setRating(array.get(position).getSoSao());
-        viewHolder.tenKhTxt.setText(array.get(position).getHoTen());
+        viewHolder.tenKhTxt.setText(array.get(position).getTen());
         viewHolder.danggiaTxt.setText(array.get(position).getDanhGia());
     }
 

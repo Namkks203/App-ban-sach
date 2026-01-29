@@ -1,19 +1,25 @@
 package com.namkks.appbansach123.adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -24,76 +30,64 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.namkks.appbansach123.R;
+import com.namkks.appbansach123.models.ChiTietDonHang;
+import com.namkks.appbansach123.models.GioHang;
 import com.namkks.appbansach123.models.Sach;
-import com.namkks.appbansach123.view.TTSPActivity;
+import com.namkks.appbansach123.view.ChiTietDonHangActivity;
 
 import java.text.DecimalFormat;
-import java.util.List;
+import java.util.ArrayList;
 
-public class ListSachAdapter extends RecyclerView.Adapter<ListSachAdapter.SachViewHolder> {
+public class ChoThanhToanAdapter extends RecyclerView.Adapter<ChoThanhToanAdapter.ViewHolder>{
+    ArrayList<GioHang> arrayList;
 
-    private final List<Sach> listSach;
-
-    // Tạo 1 lần – tái sử dụng
-    private static final DecimalFormat PRICE_FORMAT =
-            new DecimalFormat("###,###,###");
-
-    public ListSachAdapter(List<Sach> listSach) {
-        this.listSach = listSach;
-        setHasStableIds(true);
+    public ChoThanhToanAdapter(ArrayList<GioHang> arrayList) {
+        this.arrayList = arrayList;
     }
 
     @NonNull
     @Override
-    public SachViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.itemsach, parent, false);
-        return new SachViewHolder(view);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.itemchitietdonhang, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SachViewHolder holder, int position) {
-        holder.bind(listSach.get(position));
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return listSach.get(position).getId();
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        holder.bind(arrayList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return listSach == null ? 0 : listSach.size();
+        return arrayList != null ? arrayList.size() : 0;
     }
 
-    // ====================== ViewHolder ======================
-    static class SachViewHolder extends RecyclerView.ViewHolder {
-        ImageView imgSach;
-        TextView tenSachTxt, giaSachTxt;
-        ProgressBar imageProgress;
 
-        public SachViewHolder(@NonNull View itemView) {
+    public class ViewHolder extends RecyclerView.ViewHolder{
+
+        ImageView itemdonhangImage;
+        TextView item_ctdhtenSach, item_ctdhGiaBan,item_ctdhGiaThue, item_ctdhSoL;
+        ProgressBar imageProgress;
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imgSach = itemView.findViewById(R.id.item_anhSach);
-            tenSachTxt = itemView.findViewById(R.id.tenSachTxt);
-            giaSachTxt = itemView.findViewById(R.id.giaSachTxt);
+            itemdonhangImage = itemView.findViewById(R.id.item_anhSach);
+            item_ctdhtenSach = itemView.findViewById(R.id.item_ctdhTenSach);
+            item_ctdhGiaBan = itemView.findViewById(R.id.item_ctdhGiaBan);
+            item_ctdhGiaThue = itemView.findViewById(R.id.item_ctdhGiaThue);
+            item_ctdhSoL = itemView.findViewById(R.id.item_ctdhSoL);
             imageProgress = itemView.findViewById(R.id.imageProgress);
+
         }
 
-        void bind(Sach sach) {
-            tenSachTxt.setText(sach.getTenSach());
-            giaSachTxt.setText(
-                    PRICE_FORMAT.format(sach.getGiaBan()) + " đ"
-            );
+        public void bind(GioHang gioHang){
+            Sach sach = Sach.getSachById(gioHang.getSachId());
 
             loadImage(sach.getAnh());
-
-            itemView.setOnClickListener(v -> {
-                Context context = itemView.getContext();
-                Intent intent = new Intent(context, TTSPActivity.class);
-                intent.putExtra("id_sach", sach.getId());
-                context.startActivity(intent);
-            });
+            item_ctdhtenSach.setText(sach.getTenSach());
+            item_ctdhSoL.setText(String.format("x%d", gioHang.getSoLuong()));
+            DecimalFormat formatter = new DecimalFormat("###,###,###");
+            item_ctdhGiaBan.setText(String.format("Giá Bán: %s đ", formatter.format(sach.getGiaBan())));
+            item_ctdhGiaThue.setText(String.format("Giá thuê: %s đ", formatter.format(sach.getGiaThue())));
         }
 
         private void loadImage(String url) {
@@ -106,7 +100,7 @@ public class ListSachAdapter extends RecyclerView.Adapter<ListSachAdapter.SachVi
                     .skipMemoryCache(false)
                     .transition(DrawableTransitionOptions.withCrossFade(200))
                     .listener(glideListener())
-                    .into(imgSach);
+                    .into(itemdonhangImage);
         }
 
         private RequestListener<Drawable> glideListener() {

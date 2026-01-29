@@ -65,7 +65,7 @@ public class BinhLuan extends KhachHang{
                 bl.setSoSao(rs.getFloat(3));
                 bl.setId_sach(rs.getInt(4));
                 bl.setId_khachhang(rs.getInt(5));
-                bl.setHoTen(rs.getString(6));
+                bl.setTen(rs.getString(6));
                 listbl.add(bl);
             }
             return listbl;

@@ -57,10 +57,10 @@ public class ListChiTietHoaDonAdapter extends RecyclerView.Adapter<ListChiTietHo
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            item_ctdhImage = itemView.findViewById(R.id.item_ctdhImage);
-            item_ctdhTenSach = itemView.findViewById(R.id.item_ctdhTenSach);
-            item_ctdhSoL = itemView.findViewById(R.id.item_ctdhSoL);
-            item_ctdhGia = itemView.findViewById(R.id.item_ctdhGia);
+//            item_ctdhImage = itemView.findViewById(R.id.item_ctdhImage);
+//            item_ctdhTenSach = itemView.findViewById(R.id.item_ctdhTenSach);
+//            item_ctdhSoL = itemView.findViewById(R.id.item_ctdhSoL);
+//            item_ctdhGia = itemView.findViewById(R.id.item_ctdhGia);
         }
     }
 }

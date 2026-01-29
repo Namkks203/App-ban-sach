@@ -1,15 +1,21 @@
 package com.namkks.appbansach123.view;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
+import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,6 +30,10 @@ public class QuanLyVatTuActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     RecyclerView recyclerViewSXSach;
+    TextView suaXoaSachTitle;
+    ImageView menuIcon;
+    DrawerLayout drawerLayout;
+    LinearLayout addMaterial;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +47,17 @@ public class QuanLyVatTuActivity extends AppCompatActivity {
         });
         AnhXa();
         ActionBar();
+        setAction();
         LoadData();
     }
 
     private void AnhXa() {
         toolbar = findViewById(R.id.toolbarTK);
         recyclerViewSXSach = findViewById(R.id.recycleviewSXSach);
+        suaXoaSachTitle = findViewById(R.id.suaXoaSachTitle);
+        menuIcon = findViewById(R.id.menuIcon);
+        drawerLayout = findViewById(R.id.drawerlayout);
+        addMaterial = findViewById(R.id.addMaterial);
     }
 
     @SuppressLint("RestrictedApi")
@@ -56,7 +71,7 @@ public class QuanLyVatTuActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        toolbar.setTitle("Quản lý vật tư");
+        suaXoaSachTitle.setText("Quản lý vật tư");
     }
 
     private void LoadData() {
@@ -65,5 +80,17 @@ public class QuanLyVatTuActivity extends AppCompatActivity {
         ListQuanLyVatTuAdater listQuanLyVatTuAdater = new ListQuanLyVatTuAdater(
                 TonKho.getListTonKhoByChiNhanhId(nhanVien.getChiNhanhId()));
         recyclerViewSXSach.setAdapter(listQuanLyVatTuAdater);
+    }
+    private void setAction(){
+        menuIcon.setOnClickListener(v -> {
+            drawerLayout.openDrawer(GravityCompat.END);
+        });
+
+        addMaterial.setOnClickListener(view -> {
+            Intent intent = new Intent(
+                    QuanLyVatTuActivity.this,
+                    NhapVatTuActivity.class);
+            startActivity(intent);
+        });
     }
 }

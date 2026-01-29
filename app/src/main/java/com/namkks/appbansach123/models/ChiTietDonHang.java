@@ -20,47 +20,47 @@ public class ChiTietDonHang extends DonHang{
         this.soLuong = soLuong;
     }
 
-    public boolean addCTDH(){
-        try {
-            int id_dh = addDonHang();
-            if(id_dh > 0){
-                for (GioHang item: GioHang.getGioHang(this.getId_khachhang())) {
-                    DAO a = new DAO();
-                    PreparedStatement stm = a.con.prepareStatement("INSERT INTO `chitietdonhang`(`id_donhang`, `id_sach`, `soluong`) VALUES (?, ?, ?)");
-                    stm.setInt(1, id_dh);
-                    stm.setInt(2, item.getId());
-                    stm.setInt(3, item.getSoLuong());
-
-                    if(stm.executeUpdate() > 0){
-                        stm = a.con.prepareStatement("DELETE FROM giohang where id_khachhang = ? and id_sach = ?");
-                        stm.setInt(1, this.getId_khachhang());
-                        stm.setInt(2, item.getId());
-                        stm.executeUpdate();
-                    }
-                }
-                return true;
-            }
-            return false;
-        }catch (SQLException e){
-            return false;
-        }
-    }
-    public boolean muaNgay(int id_sach) {
-        try {
-            int id_dh = addDonHang();
-            if (id_dh > 0) {
-                DAO a = new DAO();
-                PreparedStatement stm = a.con.prepareStatement("INSERT INTO `chitietdonhang`(`id_donhang`, `id_sach`, `soluong`) VALUES (?, ?, ?)");
-                stm.setInt(1, id_dh);
-                stm.setInt(2, id_sach);
-                stm.setInt(3, 1);
-                return stm.executeUpdate() > 0;
-            }
-            return false;
-        } catch (SQLException e) {
-            return false;
-        }
-    }
+//    public boolean addCTDH(){
+//        try {
+//            int id_dh = addDonHang();
+//            if(id_dh > 0){
+//                for (GioHang item: GioHang.getGioHang(this.getId_khachhang())) {
+//                    DAO a = new DAO();
+//                    PreparedStatement stm = a.con.prepareStatement("INSERT INTO `chitietdonhang`(`id_donhang`, `id_sach`, `soluong`) VALUES (?, ?, ?)");
+//                    stm.setInt(1, id_dh);
+//                    stm.setInt(2, item.getId());
+//                    stm.setInt(3, item.getSoLuong());
+//
+//                    if(stm.executeUpdate() > 0){
+//                        stm = a.con.prepareStatement("DELETE FROM giohang where id_khachhang = ? and id_sach = ?");
+//                        stm.setInt(1, this.getId_khachhang());
+//                        stm.setInt(2, item.getId());
+//                        stm.executeUpdate();
+//                    }
+//                }
+//                return true;
+//            }
+//            return false;
+//        }catch (SQLException e){
+//            return false;
+//        }
+//    }
+//    public boolean muaNgay(int id_sach) {
+//        try {
+//            int id_dh = addDonHang();
+//            if (id_dh > 0) {
+//                DAO a = new DAO();
+//                PreparedStatement stm = a.con.prepareStatement("INSERT INTO `chitietdonhang`(`id_donhang`, `id_sach`, `soluong`) VALUES (?, ?, ?)");
+//                stm.setInt(1, id_dh);
+//                stm.setInt(2, id_sach);
+//                stm.setInt(3, 1);
+//                return stm.executeUpdate() > 0;
+//            }
+//            return false;
+//        } catch (SQLException e) {
+//            return false;
+//        }
+//    }
     public static boolean XoaDonHang(int iddh){
         try{
             DAO a = new DAO();

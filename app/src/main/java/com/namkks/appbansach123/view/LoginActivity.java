@@ -1,6 +1,5 @@
 package com.namkks.appbansach123.view;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -15,7 +14,6 @@ import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -52,8 +50,7 @@ public class LoginActivity extends AppCompatActivity {
             return insets;
         });
         AnhXa();
-//        ShowProFile();
-//        ShowNVProfile();
+        loadData();
         FlipForm();
         DangNhap();
         DangKy();
@@ -292,9 +289,7 @@ public class LoginActivity extends AppCompatActivity {
                                         "Đăng nhập thành công!",
                                         Toast.LENGTH_SHORT)
                                 .show();
-                        if(tk.getLoaiTaiKhoan().equals("nhan_vien") || tk.getLoaiTaiKhoan().equals("quan_ly")){
-                            ShowNVProfile();
-                        }
+                        loadData();
                     }
 
                 }
@@ -302,26 +297,42 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
+
+    private void loadData(){
+        if(tk != null){
+            if(tk.getLoaiTaiKhoan().equals("nhan_vien") || tk.getLoaiTaiKhoan().equals("quan_ly")){
+                ShowNVProfile();
+            } else if (tk.getLoaiTaiKhoan().equals("khach_hang")) {
+                ShowProFile();
+            }
+        }
+    }
     private void DangKy(){
         dkBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                KhachHang kh = new KhachHang();
-                kh.setHoTen(hoTenDKtxt.getText().toString());
-                kh.setSdt(sdtDKtxt.getText().toString());
-                kh.setPass(passDKtxt.getText().toString());
-                kh.setDiaChi(diaChiDKtxt.getText().toString());
-                if(kh.AddKhachHang()){
-                    Toast.makeText(LoginActivity.this, "Đăng ký thành công!\nVui lòng đăng nhập.",Toast.LENGTH_SHORT).show();
-                    viewFlipperLogin.showNext();
-                    isLoginForm = true;
-                }else{
-                    Toast.makeText(LoginActivity.this, "Số điện thoại này đã được đăng ký!",Toast.LENGTH_SHORT).show();
-                }
+//                KhachHang kh = new KhachHang();
+//                kh.setTen(hoTenDKtxt.getText().toString());
+//                kh.setDienThoai(sdtDKtxt.getText().toString());
+//                kh.setEmail(passDKtxt.getText().toString());
+//                kh.setDiaChi(diaChiDKtxt.getText().toString());
+//                if(kh.AddKhachHang()){
+//                    Toast.makeText(LoginActivity.this, "Đăng ký thành công!\nVui lòng đăng nhập.",Toast.LENGTH_SHORT).show();
+//                    viewFlipperLogin.showNext();
+//                    isLoginForm = true;
+//                }else{
+//                    Toast.makeText(LoginActivity.this, "Số điện thoại này đã được đăng ký!",Toast.LENGTH_SHORT).show();
+//                }
             }
         });
     }
-//    private void ShowProFile(){
+    private void ShowProFile(){
+        KhachHang kh = KhachHang.getKhachHangByTaiKhoanId(tk.getId());
+        loreform.setVisibility(View.GONE);
+        tk_profile.setVisibility(View.VISIBLE);
+        if(tk != null) {
+            tenKhtxt.setText(kh.getTen());
+        }
 //        if(LoginActivity.tk != null){
 //            loreform.setVisibility(View.GONE);
 //            tk_profile.setVisibility(View.VISIBLE);
@@ -339,7 +350,7 @@ public class LoginActivity extends AppCompatActivity {
 //                soLHoaDon.setVisibility(View.GONE);
 //            }
 //        }
-//    }
+    }
     private void ShowNVProfile(){
         NhanVien nv = NhanVien.getNhanVien(tk.getId());
         loreform.setVisibility(View.GONE);

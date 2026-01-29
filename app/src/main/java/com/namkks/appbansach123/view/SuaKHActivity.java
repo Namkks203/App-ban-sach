@@ -63,9 +63,9 @@ public class SuaKHActivity extends AppCompatActivity {
         int idkh = getIntent().getIntExtra("id_kh", 0);
         kh = KhachHang.getKH(idkh);
         if(kh != null){
-            tenKHSuaTxt.setText(kh.getHoTen());
-            sdtKHSuaTxt.setText(kh.getSdt());
-            mkSuaTxt.setText(kh.getPass());
+            tenKHSuaTxt.setText(kh.getTen());
+            sdtKHSuaTxt.setText(kh.getDienThoai());
+            mkSuaTxt.setText(kh.getEmail());
             diaChiSuaTxt.setText(kh.getDiaChi());
         }
     }
@@ -76,9 +76,9 @@ public class SuaKHActivity extends AppCompatActivity {
                 if(kh != null){
                     KhachHang kh2 = new KhachHang();
                     kh2.setId(kh.getId());
-                    kh2.setHoTen(tenKHSuaTxt.getText().toString());
-                    kh2.setSdt(sdtKHSuaTxt.getText().toString());
-                    kh2.setPass(mkSuaTxt.getText().toString());
+                    kh2.setTen(tenKHSuaTxt.getText().toString());
+                    kh2.setDienThoai(sdtKHSuaTxt.getText().toString());
+                    kh2.setEmail(mkSuaTxt.getText().toString());
                     kh2.setDiaChi(diaChiSuaTxt.getText().toString());
 
                     if(kh2.SuaKH()){

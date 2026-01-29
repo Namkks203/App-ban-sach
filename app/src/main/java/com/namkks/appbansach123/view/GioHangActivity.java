@@ -1,5 +1,6 @@
 package com.namkks.appbansach123.view;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -20,8 +22,13 @@ import com.namkks.appbansach123.R;
 import com.namkks.appbansach123.adapter.ListGioHangAdapter;
 import com.namkks.appbansach123.models.ChiTietDonHang;
 import com.namkks.appbansach123.models.GioHang;
+import com.namkks.appbansach123.models.KhachHang;
+import com.namkks.appbansach123.models.Sach;
+import com.namkks.appbansach123.models.SachTacGia;
+import com.namkks.appbansach123.models.SachTheLoai;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 public class GioHangActivity extends AppCompatActivity {
     TextView thanhTienTxt;
@@ -53,28 +60,39 @@ public class GioHangActivity extends AppCompatActivity {
         thanhToanBtn = findViewById(R.id.thanhToanBtn);
     }
     public void ThanhToanBtn(){
-//        thanhToanBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if(LoginActivity.kh != null){
-//                    if(GioHang.getGioHang(LoginActivity.kh.getId()).isEmpty()){
-//                        Toast.makeText(GioHangActivity.this, "Giỏ hàng bạn đang trống.", Toast.LENGTH_SHORT).show();
-//                    }
-//                    else {
-//                        ChiTietDonHang ctdh = new ChiTietDonHang();
-//                        ctdh.setId_khachhang(LoginActivity.kh.getId());
-//                        if(ctdh.addCTDH()){
-//                            Toast.makeText(GioHangActivity.this, "Đặt hàng thành công!", Toast.LENGTH_SHORT).show();
-//                            recreate();
-//                        }else{
-//                            Toast.makeText(GioHangActivity.this, "Đặt hàng thất bại!", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                }else{
-//                    Toast.makeText(GioHangActivity.this, "Bạn phải đăng nhập để sử dụng chức năng này.", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
+        thanhToanBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(LoginActivity.tk != null){
+                    KhachHang kh = KhachHang.getKhachHangByTaiKhoanId(LoginActivity.tk.getId());
+                    if(GioHang.getGioHangByKhachHangId(kh.getId()) == null){
+                        Toast.makeText(GioHangActivity.this, "Giỏ hàng bạn đang trống.", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        new AlertDialog.Builder(GioHangActivity.this)
+                                .setTitle("Xác nhận")
+                                .setMessage("Bạn muốn mua hay thuê?")
+                                .setCancelable(false)
+                                .setPositiveButton("Thuê", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                        Intent intent = new Intent(GioHangActivity.this, ThanhToanActivity.class);
+                                        startActivity(intent);
+                                    }
+                                })
+                                .setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dialogInterface.dismiss();
+                                    }
+                                }).show();
+                    }
+                }else{
+                    Toast.makeText(GioHangActivity.this, "Bạn phải đăng nhập để sử dụng chức năng này.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
     public void ChuyenTKLayOut(){
         tkLayout.setOnClickListener(new View.OnClickListener() {
@@ -98,20 +116,28 @@ public class GioHangActivity extends AppCompatActivity {
 
     public void LoadData(){
         recyclerViewGH.setLayoutManager(new LinearLayoutManager(this));
-//        if (LoginActivity.kh != null){
-//            ListGioHangAdapter listGioHangAdapter = new ListGioHangAdapter(GioHang.getGioHang(LoginActivity.kh.getId()),
-//                    this, LoginActivity.kh.getId());
-//            recyclerViewGH.setAdapter(listGioHangAdapter);
-//            DecimalFormat formatter = new DecimalFormat("###,###,###");
-//            String tienvnd = formatter.format(GioHang.GetTongTien(LoginActivity.kh.getId())) + " đ";
-//            thanhTienTxt.setText(tienvnd);
-//            listGioHangAdapter.setOnDataChangedListener(new ListGioHangAdapter.OnDataChangedListener() {
-//                @Override
-//                public void onDataChanged() {
-//                    recreate();
-//                }
-//            });
-//        }
+        if (LoginActivity.tk != null && LoginActivity.tk.getLoaiTaiKhoan().equals("khach_hang")){
+            KhachHang kh = KhachHang.getKhachHangByTaiKhoanId(LoginActivity.tk.getId());
+            ArrayList<GioHang> gioHangs = GioHang.getGioHangByKhachHangId(kh.getId());
+            if(gioHangs == null)
+                gioHangs = new ArrayList<>();
+            ListGioHangAdapter listGioHangAdapter = new ListGioHangAdapter(gioHangs);
+            recyclerViewGH.setAdapter(listGioHangAdapter);
+            DecimalFormat formatter = new DecimalFormat("###,###,###");
+            int tongTien = 0;
+            for (GioHang gioHang : gioHangs){
+                Sach sach = Sach.getSachById(gioHang.getSachId());
+                tongTien = tongTien + sach.getGiaBan() * gioHang.getSoLuong();
+            }
+            String tienvnd = formatter.format(tongTien) + " đ";
+            thanhTienTxt.setText(tienvnd);
+            listGioHangAdapter.setOnDataChangedListener(new ListGioHangAdapter.OnDataChangedListener() {
+                @Override
+                public void onDataChanged() {
+                    recreate();
+                }
+            });
+        }
 
     }
 }

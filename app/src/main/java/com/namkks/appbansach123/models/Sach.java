@@ -306,4 +306,9 @@ public class Sach {
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
+
+    @Override
+    public String toString() {
+        return this.tenSach;
+    }
 }
