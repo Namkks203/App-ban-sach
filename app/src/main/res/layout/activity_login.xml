@@ -575,7 +575,7 @@
                         android:id="@+id/themSachLayout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="Thêm quần áo"
+                        android:text="Thêm sách"
                         android:textSize="18sp"
                         android:gravity="center_vertical"
                         android:layout_marginLeft="10dp"/>
@@ -595,7 +595,7 @@
                         android:id="@+id/suaSachLayout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="Sửa quần áo"
+                        android:text="Sửa sách"
                         android:textSize="18sp"
                         android:gravity="center_vertical"
                         android:layout_marginLeft="10dp"/>
@@ -615,7 +615,7 @@
                         android:id="@+id/xoaSachLayout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="Xóa quần áo"
+                        android:text="Xóa sách"
                         android:textSize="18sp"
                         android:gravity="center_vertical"
                         android:layout_marginLeft="10dp"/>
