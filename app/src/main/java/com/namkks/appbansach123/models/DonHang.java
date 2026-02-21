@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class DonHang {
     private int id;
@@ -35,9 +37,9 @@ public class DonHang {
         this.createdAt = createdAt;
     }
 
-    public DonHang addDonHang(){
+    public DonHang addDonHang() {
         DAO dao = new DAO();
-        try{
+        try {
             PreparedStatement stm = dao.con.prepareStatement("INSERT INTO don_hangs (khach_hang_id," +
                     "loai_don, tong_tien, tong_tien_coc) VALUES (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             stm.setInt(1, this.khachHangId);
@@ -46,9 +48,9 @@ public class DonHang {
             stm.setInt(4, this.tongTienCoc);
 
             int affected = stm.executeUpdate();
-            if(affected > 0){
+            if (affected > 0) {
                 ResultSet resultSet = stm.getGeneratedKeys();
-                if(resultSet.next()){
+                if (resultSet.next()) {
                     DonHang donHang = getDonHangById(resultSet.getInt(1));
 
                     dao.close();
@@ -57,20 +59,20 @@ public class DonHang {
             }
             dao.close();
             return null;
-        }catch (Exception e){
+        } catch (Exception e) {
             dao.close();
             return null;
         }
     }
 
-    public static DonHang getDonHangById(int id){
+    public static DonHang getDonHangById(int id) {
         DAO dao = new DAO();
-        try{
+        try {
             PreparedStatement stm = dao.con.prepareStatement("SELECT * FROM don_hangs WHERE id = ?");
             stm.setInt(1, id);
 
             ResultSet resultSet = stm.executeQuery();
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 DonHang donHang = new DonHang();
                 donHang.setId(resultSet.getInt("id"));
                 donHang.setChiNhanhId(resultSet.getInt("chi_nhanh_id"));
@@ -87,9 +89,146 @@ public class DonHang {
             }
             dao.close();
             return null;
+        } catch (Exception e) {
+            dao.close();
+            return null;
+        }
+    }
+
+    public static ArrayList<DonHang> getDonHangsByKhachHangId(int khachHangId) {
+        DAO dao = new DAO();
+        try {
+            ArrayList<DonHang> donHangs = new ArrayList<>();
+            PreparedStatement statement = dao.con.prepareStatement("SELECT * FROM don_hangs " +
+                    "WHERE khach_hang_id = ?");
+            statement.setInt(1, khachHangId);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                DonHang donHang = new DonHang();
+                donHang.setId(resultSet.getInt("id"));
+                donHang.setChiNhanhId(resultSet.getInt("chi_nhanh_id"));
+                donHang.setKhachHangId(resultSet.getInt("khach_hang_id"));
+                donHang.setNhanVienId(resultSet.getInt("nhan_vien_id"));
+                donHang.setLoaiDon(resultSet.getString("loai_don"));
+                donHang.setTrangThai(resultSet.getString("trang_thai"));
+                donHang.setTongTien(resultSet.getInt("tong_tien"));
+                donHang.setTongTienCoc(resultSet.getInt("tong_tien_coc"));
+                donHang.setCreatedAt(resultSet.getTimestamp("created_at"));
+
+                donHangs.add(donHang);
+            }
+
+            dao.close();
+            return donHangs;
+        } catch (Exception e) {
+            dao.close();
+            return null;
+        }
+    }
+
+    public static ArrayList<DonHang> getDonHangsByChiNhanhId(int chiNhanhId) {
+        DAO dao = new DAO();
+        try {
+            ArrayList<DonHang> donHangs = new ArrayList<>();
+            PreparedStatement statement = dao.con.prepareStatement("SELECT * FROM don_hangs " +
+                    "WHERE chi_nhanh_id = ?");
+            statement.setInt(1, chiNhanhId);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                DonHang donHang = new DonHang();
+                donHang.setId(resultSet.getInt("id"));
+                donHang.setChiNhanhId(resultSet.getInt("chi_nhanh_id"));
+                donHang.setKhachHangId(resultSet.getInt("khach_hang_id"));
+                donHang.setNhanVienId(resultSet.getInt("nhan_vien_id"));
+                donHang.setLoaiDon(resultSet.getString("loai_don"));
+                donHang.setTrangThai(resultSet.getString("trang_thai"));
+                donHang.setTongTien(resultSet.getInt("tong_tien"));
+                donHang.setTongTienCoc(resultSet.getInt("tong_tien_coc"));
+                donHang.setCreatedAt(resultSet.getTimestamp("created_at"));
+
+                donHangs.add(donHang);
+            }
+
+            dao.close();
+            return donHangs;
+        } catch (Exception e) {
+            dao.close();
+            return null;
+        }
+    }
+
+    public static ArrayList<DonHang> getDonHangsTrangThaiByKhachHangId(String trangThai, int khachHangId) {
+        DAO dao = new DAO();
+        try {
+            ArrayList<DonHang> donHangs = new ArrayList<>();
+            PreparedStatement statement = dao.con.prepareStatement("SELECT * FROM don_hangs " +
+                    "WHERE khach_hang_id = ? AND trang_thai = ?");
+            statement.setInt(1, khachHangId);
+            statement.setString(2, trangThai);
+
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                DonHang donHang = new DonHang();
+                donHang.setId(resultSet.getInt("id"));
+                donHang.setChiNhanhId(resultSet.getInt("chi_nhanh_id"));
+                donHang.setKhachHangId(resultSet.getInt("khach_hang_id"));
+                donHang.setNhanVienId(resultSet.getInt("nhan_vien_id"));
+                donHang.setLoaiDon(resultSet.getString("loai_don"));
+                donHang.setTrangThai(resultSet.getString("trang_thai"));
+                donHang.setTongTien(resultSet.getInt("tong_tien"));
+                donHang.setTongTienCoc(resultSet.getInt("tong_tien_coc"));
+                donHang.setCreatedAt(resultSet.getTimestamp("created_at"));
+
+                donHangs.add(donHang);
+            }
+
+            dao.close();
+            return donHangs;
+        } catch (Exception e) {
+            dao.close();
+            return null;
+        }
+    }
+
+    public DonHang updateTrangThai(String trangThai) {
+        DAO dao = new DAO();
+        try {
+            PreparedStatement statement = dao.con.prepareStatement(
+                    "UPDATE don_hangs set trang_thai = ? WHERE id = ?"
+            );
+            statement.setString(1, trangThai);
+            statement.setInt(2, this.id);
+
+            int affected = statement.executeUpdate();
+            if(affected > 0){
+                this.setTrangThai(trangThai);
+
+                dao.close();
+                return this;
+            }
+
+            dao.close();
+            return null;
         }catch (Exception e){
             dao.close();
             return null;
+        }
+    }
+
+    public static boolean deleteDonHangById(int id){
+        DAO dao = new DAO();
+        try{
+            PreparedStatement statement = dao.con.prepareStatement(
+                    "DELETE FROM don_hangs WHERE id = ?");
+            statement.setInt(1, id);
+
+            int affected = statement.executeUpdate();
+
+            dao.close();
+            return affected > 0;
+        }catch (Exception e){
+            dao.close();
+            return false;
         }
     }
 

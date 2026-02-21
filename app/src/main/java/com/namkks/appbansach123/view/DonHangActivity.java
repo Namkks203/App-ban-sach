@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.namkks.appbansach123.R;
 import com.namkks.appbansach123.adapter.ListDonHangAdapter;
 import com.namkks.appbansach123.adapter.ListGioHangAdapter;
-import com.namkks.appbansach123.models.ChiTietDonHang;
+
 
 public class DonHangActivity extends AppCompatActivity {
     Toolbar toolbar;

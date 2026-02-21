@@ -19,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.namkks.appbansach123.R;
 import com.namkks.appbansach123.adapter.ListChiTietDonHangAdapter;
-import com.namkks.appbansach123.models.ChiTietDonHang;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -67,23 +66,6 @@ public class ChiTietDonHangActivity extends AppCompatActivity {
     }
     private void LoadData(){
         int iddh = getIntent().getIntExtra("iddh", 0);
-        ArrayList<ChiTietDonHang> ctdh = ChiTietDonHang.getChiTietDonHang(iddh);
-        id_donhang.setText("#" + iddh);
-        soLDonHang.setText(ChiTietDonHang.getSoL(iddh)+" sản phẩm");
-        DecimalFormat formatter = new DecimalFormat("###,###,###");
-        String tienvnd = formatter.format(ChiTietDonHang.getTongTien(iddh)) + " đ";
-        tongTienDonHang.setText(tienvnd);
-//        hoTenKH.setText(LoginActivity.kh.getHoTen());
-//        sdtKH.setText(LoginActivity.kh.getSdt());
-//        diaChiKH.setText(LoginActivity.kh.getDiaChi());
-        String tongtien = "Tổng tiền: " + tienvnd;
-        SpannableString spannableString = new SpannableString(tongtien);
-        spannableString.setSpan(new ForegroundColorSpan(Color.RED), 11, tongtien.length(), 0);
-        TongTienCTDH.setText(spannableString);
 
-        ListChiTietDonHangAdapter listChiTietDonHangAdapter = new ListChiTietDonHangAdapter
-                (ctdh, this);
-        recycleViewCTDH.setLayoutManager(new LinearLayoutManager(this));
-        recycleViewCTDH.setAdapter(listChiTietDonHangAdapter);
     }
 }

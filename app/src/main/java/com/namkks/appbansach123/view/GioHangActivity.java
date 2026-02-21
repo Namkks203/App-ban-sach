@@ -3,6 +3,7 @@ package com.namkks.appbansach123.view;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -20,7 +21,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.namkks.appbansach123.R;
 import com.namkks.appbansach123.adapter.ListGioHangAdapter;
-import com.namkks.appbansach123.models.ChiTietDonHang;
 import com.namkks.appbansach123.models.GioHang;
 import com.namkks.appbansach123.models.KhachHang;
 import com.namkks.appbansach123.models.Sach;
@@ -51,6 +51,11 @@ public class GioHangActivity extends AppCompatActivity {
         ChuyenTCLayOut();
         ThanhToanBtn();
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LoadData();   // hàm load lại dữ liệu
+    }
 
     public void AnhXa(){
         recyclerViewGH = findViewById(R.id.recycleviewGH);
@@ -69,24 +74,7 @@ public class GioHangActivity extends AppCompatActivity {
                         Toast.makeText(GioHangActivity.this, "Giỏ hàng bạn đang trống.", Toast.LENGTH_SHORT).show();
                     }
                     else {
-                        new AlertDialog.Builder(GioHangActivity.this)
-                                .setTitle("Xác nhận")
-                                .setMessage("Bạn muốn mua hay thuê?")
-                                .setCancelable(false)
-                                .setPositiveButton("Thuê", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                                        Intent intent = new Intent(GioHangActivity.this, ThanhToanActivity.class);
-                                        startActivity(intent);
-                                    }
-                                })
-                                .setNegativeButton("Không", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        dialogInterface.dismiss();
-                                    }
-                                }).show();
+                        showDialogThueOrMua();
                     }
                 }else{
                     Toast.makeText(GioHangActivity.this, "Bạn phải đăng nhập để sử dụng chức năng này.", Toast.LENGTH_SHORT).show();
@@ -139,5 +127,33 @@ public class GioHangActivity extends AppCompatActivity {
             });
         }
 
+    }
+    private void showDialogThueOrMua(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        LayoutInflater inflater = getLayoutInflater();
+
+        View dialogView = inflater.inflate(R.layout.dialog_mua_or_thue, null);
+
+        builder.setView(dialogView);
+
+        TextView huyBtn = dialogView.findViewById(R.id.huyBtn);
+        TextView thueBtn = dialogView.findViewById(R.id.thueBtn);
+        TextView muaBtn = dialogView.findViewById(R.id.muaBtn);
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        huyBtn.setOnClickListener(v -> dialog.dismiss());
+        thueBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ThanhToanActivity.class);
+            intent.putExtra("trang_thai", "thue");
+            startActivity(intent);
+        });
+        muaBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ThanhToanActivity.class);
+            intent.putExtra("trang_thai", "mua");
+            startActivity(intent);
+        });
     }
 }

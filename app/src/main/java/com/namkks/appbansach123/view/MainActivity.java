@@ -3,6 +3,7 @@ package com.namkks.appbansach123.view;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -34,6 +35,7 @@ import com.namkks.appbansach123.adapter.ListSachAdapter;
 import com.namkks.appbansach123.adapter.LoaiSPAdapter;
 import com.namkks.appbansach123.models.Sach;
 import com.google.android.material.navigation.NavigationView;
+import com.namkks.appbansach123.models.TaiKhoan;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         ActionBar();
 
         if(isConnected(this)){
+            LoadData();
             ActionViewFlipper();
             getLoaiSanPham();
             getListSanPham();
@@ -177,6 +180,20 @@ public class MainActivity extends AppCompatActivity {
         }else{
             return false;
         }
+    }
+
+    private void LoadData(){
+        SharedPreferences sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+
+        boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
+
+        if (isLoggedIn) {
+            String username = sharedPreferences.getString("username", "");
+            String password = sharedPreferences.getString("password", "");
+
+            LoginActivity.tk = TaiKhoan.dangNhap(username, password);
+        }
+
     }
 
 }

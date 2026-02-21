@@ -202,7 +202,7 @@
                                 android:layout_marginRight="10dp"
                                 android:layout_width="150dp"
                                 android:layout_height="match_parent"
-                                android:text="Tổng giá thuê: "
+                                android:text="Giá tiền: "
                                 android:textSize="18sp"
                                 android:textColor="#808080"/>
                             <TextView
@@ -236,6 +236,49 @@
                                 android:textColor="#ff0000"/>
                         </LinearLayout>
                     </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutChonNgay"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:background="#ffffff">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Chọn ngày hẹn trả"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:layout_marginTop="12dp"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="4dp">
+
+                        <EditText
+                            android:id="@+id/etDate"
+                            android:layout_width="0dp"
+                            android:layout_height="48dp"
+                            android:layout_weight="1"
+                            android:hint="Chưa chọn ngày"
+                            android:focusable="false"
+                            android:clickable="false"
+                            android:padding="12dp"/>
+
+                        <Button
+                            android:id="@+id/btnPickDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="48dp"
+                            android:text="chọn ngày" />
+                    </LinearLayout>
+                </LinearLayout>
+
                     <LinearLayout
                         android:layout_marginBottom="10dp"
                         android:layout_width="match_parent"
@@ -367,7 +410,7 @@
                             android:layout_marginBottom="10dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Tổng tiền thuê: 2000d"
+                            android:text="Tổng tiền: 2000d"
                             android:textColor="#0000ff"
                             android:textSize="22sp"
                             android:gravity="end"/>
@@ -398,7 +441,24 @@
                             tools:ignore="ContentDescription"
                             android:visibility="gone"/>
                     </LinearLayout>
-
+                <LinearLayout
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:background="#ffffff">
+                    <Button
+                        android:id="@+id/hoanTatBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Hoàn tất"
+                        android:textSize="26sp"
+                        android:backgroundTint="#008000"/>
+                </LinearLayout>
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>
         </LinearLayout>

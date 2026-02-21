@@ -30,7 +30,6 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.namkks.appbansach123.R;
-import com.namkks.appbansach123.models.ChiTietDonHang;
 import com.namkks.appbansach123.models.GioHang;
 import com.namkks.appbansach123.models.Sach;
 import com.namkks.appbansach123.view.ChiTietDonHangActivity;

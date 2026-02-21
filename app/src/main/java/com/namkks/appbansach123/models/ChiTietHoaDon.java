@@ -21,27 +21,7 @@ public class ChiTietHoaDon extends HoaDon{
         this.soL = soL;
     }
 
-    public boolean addChiTietHoaDon(int id_dh){
-        try {
-            ArrayList<ChiTietDonHang> ctdh = ChiTietDonHang.getChiTietDonHang(id_dh);
-            int id_hd = addHoaDon();
-            DAO a = new DAO();
-            if(id_hd > 0){
-                for (ChiTietDonHang i : ctdh){
-                    PreparedStatement stm = a.con.prepareStatement("INSERT INTO `chitiethoadon`(`id_hoadon`, `id_sach`, `so_luong`) VALUES (?, ?, ?)");
-                    stm.setInt(1, id_hd);
-                    stm.setInt(2, i.getId_sach());
-                    stm.setInt(3, i.getSoLuong());
-                    stm.executeUpdate();
-                }
-                ChiTietDonHang.XoaDonHang(id_dh);
-                return true;
-            }
-            return false;
-        }catch (SQLException e){
-            return false;
-        }
-    }
+
     public static ArrayList<ChiTietHoaDon> getChiTietHoaDon(int id_dh){
         ArrayList<ChiTietHoaDon> ctdh = new ArrayList<>();
         try{

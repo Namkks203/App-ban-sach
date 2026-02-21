@@ -12,17 +12,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.namkks.appbansach123.R;
-import com.namkks.appbansach123.models.ChiTietDonHang;
+import com.namkks.appbansach123.models.ChiTietDonThue;
 import com.namkks.appbansach123.models.Sach;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class ListChiTietDonHangAdapter extends RecyclerView.Adapter<ListChiTietDonHangAdapter.ViewHolder>{
-    ArrayList<ChiTietDonHang> arrayList;
+    ArrayList<ChiTietDonThue> arrayList;
     Context context;
 
-    public ListChiTietDonHangAdapter(ArrayList<ChiTietDonHang> arrayList, Context context) {
+    public ListChiTietDonHangAdapter(ArrayList<ChiTietDonThue> arrayList, Context context) {
         this.arrayList = arrayList;
         this.context = context;
     }
@@ -36,7 +36,7 @@ public class ListChiTietDonHangAdapter extends RecyclerView.Adapter<ListChiTietD
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Sach s = Sach.getSachById(arrayList.get(position).getId_sach());
+        Sach s = Sach.getSachById(0);
         Glide.with(context).load(s.getAnh()).into(holder.item_ctdhImage);
         holder.item_ctdhTenSach.setText(s.getTenSach());
         DecimalFormat formatter = new DecimalFormat("###,###,###");

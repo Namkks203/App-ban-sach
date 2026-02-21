@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.namkks.appbansach123.R;
-import com.namkks.appbansach123.models.ChiTietDonHang;
+import com.namkks.appbansach123.models.DonHang;
 import com.namkks.appbansach123.models.Sach;
 import com.namkks.appbansach123.view.ChiTietDonHangActivity;
 
@@ -29,10 +29,10 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class ListDonHangAdapter extends RecyclerView.Adapter<ListDonHangAdapter.ViewHolder>{
-    ArrayList<ChiTietDonHang> arrayList;
+    ArrayList<DonHang> arrayList;
     Context context;
 
-    public ListDonHangAdapter(ArrayList<ChiTietDonHang> arrayList, Context context) {
+    public ListDonHangAdapter(ArrayList<DonHang> arrayList, Context context) {
         this.arrayList = arrayList;
         this.context = context;
     }
@@ -46,12 +46,12 @@ public class ListDonHangAdapter extends RecyclerView.Adapter<ListDonHangAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Sach s = Sach.getSachById(arrayList.get(position).getId_sach());
+        Sach s = Sach.getSachById(0);
         Glide.with(context).load(s.getAnh()).into(holder.itemdonhangImage);
         holder.item_donhangTenSach.setText(s.getTenSach());
-        holder.item_donhangslsp.setText(ChiTietDonHang.getSoL(arrayList.get(position).getId()) + " sản phẩm");
+        holder.item_donhangslsp.setText( " sản phẩm");
         DecimalFormat formatter = new DecimalFormat("###,###,###");
-        String tienvnd = formatter.format(ChiTietDonHang.getTongTien(arrayList.get(position).getId())) + " đ";
+        String tienvnd = formatter.format( 0) + " đ";
         String tongtien = "Tổng tiền: " + tienvnd;
         SpannableString spannableString = new SpannableString(tongtien);
 
@@ -79,14 +79,7 @@ public class ListDonHangAdapter extends RecyclerView.Adapter<ListDonHangAdapter.
                         .setPositiveButton("Có", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                if(ChiTietDonHang.XoaDonHang(iddh)){
-                                    Toast.makeText(context, "Hủy thành công!", Toast.LENGTH_SHORT).show();
-                                    if (listener != null) {
-                                        listener.onDataChanged();
-                                    }
-                                }else{
-                                    Toast.makeText(context, "Hủy thất bại!", Toast.LENGTH_SHORT).show();
-                                }
+
                             }
                         })
                         .setNegativeButton("Không", new DialogInterface.OnClickListener() {

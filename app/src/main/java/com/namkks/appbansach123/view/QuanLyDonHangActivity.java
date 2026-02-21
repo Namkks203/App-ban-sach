@@ -19,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.namkks.appbansach123.R;
 import com.namkks.appbansach123.adapter.ListDonHangNVAdapter;
-import com.namkks.appbansach123.models.ChiTietDonHang;
 
 public class QuanLyDonHangActivity extends AppCompatActivity {
     Toolbar toolbar;
@@ -70,20 +69,6 @@ public class QuanLyDonHangActivity extends AppCompatActivity {
     }
     private void LoadData(){
         recyclerViewDH.setLayoutManager(new LinearLayoutManager(this));
-        ListDonHangNVAdapter listGioHangAdapter = new ListDonHangNVAdapter(ChiTietDonHang.getListDonHangNV(),
-                this);
-        String tk = getIntent().getStringExtra("tk");
-        if(tk != null){
-            listGioHangAdapter = new ListDonHangNVAdapter(ChiTietDonHang.timKiemDonHang(tk),
-                    this);
-        }
-        recyclerViewDH.setAdapter(listGioHangAdapter);
-        listGioHangAdapter.setOnDataChangedListener(new ListDonHangNVAdapter.OnDataChangedListener() {
 
-            @Override
-            public void onDataChanged() {
-                recreate();
-            }
-        });
     }
 }

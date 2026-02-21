@@ -148,6 +148,23 @@ public class GioHang{
         }
     }
 
+    public static boolean DeleteGH(int id_kh){
+        DAO a = new DAO();
+        try{
+            PreparedStatement stm = a.con.prepareStatement(
+                    "DELETE FROM `gio_hangs` WHERE khach_hang_id = ?");
+            stm.setInt(1, id_kh);
+
+            boolean result = stm.executeUpdate() > 0;
+
+            a.close();
+            return result;
+        }catch (SQLException e){
+            a.close();
+            return false;
+        }
+    }
+
     public int getKhachHangId() {
         return khachHangId;
     }
