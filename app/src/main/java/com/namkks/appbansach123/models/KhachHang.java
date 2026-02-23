@@ -31,11 +31,9 @@ public class KhachHang {
         this.taiKhoanId = taiKhoanId;
     }
 
-    public KhachHang AddKhachHang(){
+    public KhachHang addKhachHang(){
         DAO a = new DAO();
         try {
-            if (KiemTraTT(this.dienThoai))
-                return null;
             PreparedStatement stm = a.con.prepareStatement("INSERT INTO `khach_hangs`" +
                     "(ten, dien_thoai, email, dia_chi, tai_khoan_id) " +
                     "VALUES (?, ?, ?, ?, ?)",
@@ -65,53 +63,22 @@ public class KhachHang {
         }
     }
 
-    public int KiemTraDN(){
+    public static boolean KiemTraTT(String sdt, String email){
+        DAO a = new DAO();
         try {
-            DAO a = new DAO();
-            PreparedStatement stm = a.con.prepareStatement("SELECT `id` FROM `khachhang` WHERE sdt = ? and pass = ?");
-            stm.setString(1, this.dienThoai);
-            stm.setString(2, this.email);
+            PreparedStatement stm = a.con.prepareStatement(
+                    "SELECT `id` FROM `khach_hangs` WHERE dien_thoai = ? OR email = ?"
+            );
+            stm.setString(1, sdt);
+            stm.setString(2, email);
             ResultSet rs = stm.executeQuery();
-            rs.next();
-            return rs.getInt(1);
+            boolean result =  rs.next();
+
+            a.close();
+            return result;
         }catch (SQLException e){
-            return 0;
-        }
-    }
-    public boolean KiemTraTT(String sdt){
-        try {
-            DAO a = new DAO();
-            PreparedStatement stm = a.con.prepareStatement("SELECT `id` FROM `khachhang` WHERE sdt = ?");
-            stm.setString(1, this.dienThoai);
-            ResultSet rs = stm.executeQuery();
-            rs.next();
-            return rs.getInt(1) > 0;
-        }catch (SQLException e){
+            a.close();
             return false;
-        }
-    }
-    public int getSoLDonHang(){
-        try {
-            DAO a = new DAO();
-            PreparedStatement stm = a.con.prepareStatement("SELECT COUNT(id) FROM `donhang` WHERE id_khachhang = ?");
-            stm.setInt(1, this.id);
-            ResultSet rs = stm.executeQuery();
-            rs.next();
-            return rs.getInt(1);
-        }catch (SQLException e){
-            return 0;
-        }
-    }
-    public int getSoLHoaDon(){
-        try {
-            DAO a = new DAO();
-            PreparedStatement stm = a.con.prepareStatement("SELECT COUNT(id) FROM `hoadon` WHERE id_khachhang = ?");
-            stm.setInt(1, this.id);
-            ResultSet rs = stm.executeQuery();
-            rs.next();
-            return rs.getInt(1);
-        }catch (SQLException e){
-            return 0;
         }
     }
     public static KhachHang getKH(int id){

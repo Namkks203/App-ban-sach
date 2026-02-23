@@ -13,7 +13,8 @@
             android:id="@+id/loreform"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -45,7 +46,7 @@
             <ViewFlipper
                 android:id="@+id/viewflipperlogin"
                 android:layout_width="match_parent"
-                android:layout_height="500dp">
+                android:layout_height="match_parent">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -155,6 +156,46 @@
                             android:background="@null"
                             android:textSize="20sp"
                             android:hint="Nhập số điện thoại"/>
+                    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:text="Email"
+                        android:textSize="20sp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"/>
+                    <androidx.cardview.widget.CardView
+                        android:elevation="8dp"
+                        app:cardCornerRadius="4dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp">
+                        <EditText
+                            android:id="@+id/emailDKtxt"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:textSize="20sp"
+                            android:hint="Nhập email"/>
+                    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:text="Tên đăng nhập"
+                        android:textSize="20sp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"/>
+                    <androidx.cardview.widget.CardView
+                        android:elevation="8dp"
+                        app:cardCornerRadius="4dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp">
+                        <EditText
+                            android:id="@+id/tenDNTxt"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:textSize="20sp"
+                            android:hint="Nhập tên đăng nhập"/>
                     </androidx.cardview.widget.CardView>
                     <TextView
                         android:layout_width="wrap_content"
@@ -288,7 +329,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content">
                     <TextView
-                        android:id="@+id/soLDonHang"
+                        android:id="@+id/soLChoXuLy"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
@@ -297,7 +338,7 @@
                         android:layout_gravity="top|right"
                         android:textSize="17sp"/>
                     <LinearLayout
-                        android:id="@+id/choThanhToanBtn"
+                        android:id="@+id/choXuLyBtn"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
@@ -319,54 +360,82 @@
                     </LinearLayout>
                 </FrameLayout>
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="65dp"
-                        android:src="@drawable/box"
-                        android:scaleType="center"
-                        android:scaleX="0.5"
-                        android:scaleY="0.5">
-                    </ImageView>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="20dp"
-                        android:text="Đang xử lý"
-                        android:textAlignment="center"
-                        android:textSize="14sp">
-                    </TextView>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="65dp"
-                        android:src="@drawable/delivery_truck"
-                        android:scaleType="center"
-                        android:scaleX="0.5"
-                        android:scaleY="0.5">
-                    </ImageView>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="20dp"
-                        android:text="Đang giao"
-                        android:textAlignment="center"
-                        android:textSize="14sp">
-                    </TextView>
-                </LinearLayout>
                 <FrameLayout
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content">
                     <TextView
-                        android:id="@+id/soLHoaDon"
+                        android:id="@+id/soLDangChuanBi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="#ff0000"
+                        android:textStyle="bold"
+                        android:layout_gravity="top|right"
+                        android:textSize="17sp"/>
+                    <LinearLayout
+                        android:id="@+id/dangChuanBiBtn"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="65dp"
+                            android:src="@drawable/box"
+                            android:scaleType="center"
+                            android:scaleX="0.5"
+                            android:scaleY="0.5">
+                        </ImageView>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"
+                            android:text="Đang chuẩn bị"
+                            android:textAlignment="center"
+                            android:textSize="14sp">
+                        </TextView>
+                    </LinearLayout>
+                </FrameLayout>
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/soLDangGiao"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="#ff0000"
+                        android:textStyle="bold"
+                        android:layout_gravity="top|right"
+                        android:textSize="17sp"/>
+                    <LinearLayout
+                        android:id="@+id/dangGiaoBtn"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="65dp"
+                            android:src="@drawable/delivery_truck"
+                            android:scaleType="center"
+                            android:scaleX="0.5"
+                            android:scaleY="0.5">
+                        </ImageView>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"
+                            android:text="Đang giao"
+                            android:textAlignment="center"
+                            android:textSize="14sp">
+                        </TextView>
+                    </LinearLayout>
+                </FrameLayout>
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/soLHoanTat"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"

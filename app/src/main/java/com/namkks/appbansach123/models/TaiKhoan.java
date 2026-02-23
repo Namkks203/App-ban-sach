@@ -2,8 +2,10 @@ package com.namkks.appbansach123.models;
 
 import com.namkks.appbansach123.controller.DAO;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.sql.Timestamp;
 
 public class TaiKhoan {
@@ -17,9 +19,40 @@ public class TaiKhoan {
     public TaiKhoan() {
     }
 
+    public TaiKhoan addTaiKhoan(){
+        DAO dao = new DAO();
+        try{
+            PreparedStatement statement = dao.con.prepareStatement(
+                    "INSERT INTO tai_khoans (ten_dang_nhap, mat_khau, loai_tai_khoan) VALUES " +
+                            "(?, ?, ?)",
+                    Statement.RETURN_GENERATED_KEYS
+            );
+            statement.setString(1, this.tenDangNhap);
+            statement.setString(2, this.matKhau);
+            statement.setString(3, this.loaiTaiKhoan);
+
+            int affected = statement.executeUpdate();
+            if(affected > 0){
+                ResultSet resultSet = statement.getGeneratedKeys();
+                if(resultSet.next()){
+                    TaiKhoan taiKhoan = getTaiKhoanById(resultSet.getInt(1));
+
+                    dao.close();
+                    return taiKhoan;
+                }
+            }
+
+            dao.close();
+            return null;
+        } catch (Exception e) {
+            dao.close();
+            return null;
+        }
+    }
+
     public static TaiKhoan dangNhap(String tenDangNhap, String matKhau){
+        DAO dao = new DAO();
         try {
-            DAO dao = new DAO();
             PreparedStatement stm = dao.con.prepareStatement("select * from tai_khoans where ten_dang_nhap = ? and mat_khau = ?");
             stm.setString(1, tenDangNhap);
             stm.setString(2, matKhau);
@@ -34,8 +67,41 @@ public class TaiKhoan {
             tk.setTrangThai(rs.getString("trang_thai"));
             tk.setCreatedAt(rs.getTimestamp("created_at"));
 
+            dao.close();
             return tk;
         }catch (Exception e){
+            dao.close();
+            return null;
+        }
+    }
+
+    public static TaiKhoan getTaiKhoanById(int id){
+        DAO dao = new DAO();
+        try{
+            PreparedStatement statement = dao.con.prepareStatement(
+                    "SELECT * FROM tai_khoans WHERE id = ?"
+            );
+            statement.setInt(1, id);
+
+            ResultSet resultSet = statement.executeQuery();
+            if(resultSet.next()){
+                TaiKhoan taiKhoan = new TaiKhoan();
+
+                taiKhoan.setId(resultSet.getInt("id"));
+                taiKhoan.setTenDangNhap(resultSet.getString("ten_dang_nhap"));
+                taiKhoan.setMatKhau(resultSet.getString("mat_khau"));
+                taiKhoan.setLoaiTaiKhoan(resultSet.getString("loai_tai_khoan"));
+                taiKhoan.setTrangThai(resultSet.getString("trang_thai"));
+                taiKhoan.setCreatedAt(resultSet.getTimestamp("created_at"));
+
+                dao.close();
+                return taiKhoan;
+            }
+
+            dao.close();
+            return null;
+        } catch (Exception e) {
+            dao.close();
             return null;
         }
     }
